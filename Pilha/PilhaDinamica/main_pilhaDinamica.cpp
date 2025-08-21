@@ -1,11 +1,11 @@
 #include <iostream>
-#include "pilhaDinamica.h";
+#include "pilhad.h"
 
 using namespace std;
 
 int main(){
 
-    pilhaDinamica pilhad1;
+    pilhad pilhad1;
     TipoItem item;
     int menu;
 
@@ -37,7 +37,7 @@ int main(){
         }
         catch(const std::exception& e)
         {
-            cout << "Exceção Reconhecida: " << e.what() << endl;
+            cout << "Erro: " << e.what() << endl;
         }
     
 

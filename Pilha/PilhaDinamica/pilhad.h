@@ -1,16 +1,18 @@
 typedef int TipoItem;
 
 struct Node {
-    TipoItem item;
+    TipoItem valor;
     Node* proximo;
 };
 
-class pilhaDinamica {
+class pilhad {
 private:
     Node* NoTopo;
 public:
-    pilhaDinamica();
-    ~pilhaDinamica();
+    pilhad
+();
+    ~pilhad
+();
     bool pilhavazia();
     bool pilhaCheia();
     void push(TipoItem item);
