@@ -35,7 +35,42 @@ using namespace std;
         
     }
     void BST::inserir(Aluno aluno){
+                if(estaCheio()){
+                    cout << "Arvore está cheia!\n";
+                    cout << "Não foi possivel inserir esse elemento\n";
+                }else{
+                    Node* NodeNovo = new Node;
+                    NodeNovo->aluno = aluno; //nesse nó o aluno será o aluno que o usuario irá inserir
+                    NodeNovo->filhodireita = NULL; // ponteiro para o nó filho a direita está apontando para NULL pois não há um nó  
+                    NodeNovo->filhoesquerda = NULL; // ponteiro para o nó filho a esquerda está apontando para NULL pois não há um nó
+                    if(raiz == NULL){
+                        raiz =  NodeNovo; // a raiz vai apontar para esse nó novo
+                    } else{
+                        Node* temp = raiz; // cria um nó temporario que vai receber a raiz
+                        while (temp != NULL)
+                        {
+                            if(aluno.obterRa() < temp->aluno.obterRa()) // faz uma verificação se o RA do aluno que está sendo inserido for menor que o RA que está dentto do aluno do nó temporario
+                            {
+                                    if(temp->filhoesquerda == NULL){ // se for menor realiza uma outra verificação se o nó filho da esquerda é NULL
+                                        temp->filhoesquerda = NodeNovo; // armazena o nó novo no nó do filho esquerdo
+                                        break;                                        
+                                    } else{
+                                             temp = temp->filhoesquerda; // caso o no filho esquerdo não esteja NULL ele  vai para o nó esquerdo desse nó que ele verificou
+                                    }
+                            } else{
+                                if(temp->filhodireita == NULL){  //se for maior realiza uma outra verificação se o nó filho da direita é NULL
+                                    temp->filhodireita = NodeNovo; // armazena o nó novo no nó do filho direito
+                                    break;
+                                } else{
+                                    temp = temp->filhodireita; //caso o no filho direito não esteja NULL ele  vai para o nó direito desse nó que ele verificou
+                                }
 
+                            }
+                        }
+                        
+                    }
+                }
+                 
     }
     void BST::remover(Aluno aluno){
 
