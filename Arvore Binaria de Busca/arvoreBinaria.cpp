@@ -76,6 +76,19 @@ using namespace std;
 
     }
     void BST::buscar(Aluno& aluno, bool& busca){
+            busca = false;
+            Node* NoAtual = raiz;// cria um ponteiro para um nó apontando para o mesmo ponteiro da raiz
+            while(NoAtual != NULL){
+                if(aluno.obterRa() < NoAtual->aluno.obterRa()){ // verifica se o RA do aluno que está dentro do nó atual e menor do que Ra do aluno recebido pelo usuario
+                    NoAtual = NoAtual->filhoesquerda;// o no atual vá para o nó da esquerda do nó atual
+                } else if( aluno.obterRa() > NoAtual->aluno.obterRa()){ // caso o Ra  do aluno que está dentro do nó atual seja maior do que Ra do aluno recebido pelo usuario
+                    NoAtual = NoAtual->filhodireita;      
+                } else{
+                    busca = true;
+                    aluno = NoAtual->aluno;
+                    break;
+                }
+            }
 
     }
     void BST::printPreOrdem(Node* Nodeatual){
