@@ -73,6 +73,41 @@ using namespace std;
                  
     }
     void BST::remover(Aluno aluno){
+            removerBusca(aluno, raiz);
+
+    }
+
+    void BST::removerBusca(Aluno aluno, Node*& NoAtual) // O NoAtual ele é o ponteiro para o NoAtual
+    {
+            if(aluno.obterRa() < NoAtual->aluno.obterRa()){ // se o Ra  que está sendo buscado é menor que o Ra contido no NoAtual
+                removerBusca(aluno, NoAtual->filhoesquerda); // Função Recursiva, ele busca pelo Nó da esquerda até o ponteiro desse nó ser NULL,se ele não achar ele chama a função novamente
+            } else if(aluno.obterRa() > NoAtual->aluno.obterRa()){ // se for maior o Ra buscado do que o Ra que está no NoAtual ele faz a função de busca porém com o filho da direita 
+                removerBusca(aluno, NoAtual->filhodireita); // Função Recursiva, ele busca pelo Nó da direita até o ponteiro desse nó ser NULL,se ele não achar ele chama a função novamente
+            } else{
+                deletarNode(NoAtual);
+            }
+    }
+    void BST::deletarNode(Node*& NoAtual){
+        Node* temp = NoAtual; // Caso o Nó a ser deletado tenha apenas um filho, o NoAtual é o ponteiro, ele aponta para o filho do Nó deletado,porem esse No temporario aponta para o Nó a ser deletado
+        if(NoAtual->filhoesquerda == NULL){
+            NoAtual = NoAtual->filhodireita; // Esse ponteiro do Nó a ser deletado recebe e aponta para o No filho do Nó a ser deletado
+            delete temp; // deleta o nó temporario após o ponteiro NoAtual aponta para o filho do Nó deletado
+        } else if(NoAtual->filhodireita == NULL){
+            NoAtual = NoAtual->filhoesquerda;
+            delete temp;
+        } else{
+            Aluno AlunoSucessor;
+            obterSucessor(AlunoSucessor,NoAtual); //Obter Sucessor do Nó Atual caso os Nós filhos sejam diferente de vazio 
+            NoAtual->aluno = AlunoSucessor; // Troca o valor do NoAtual pelo sucessor do Nó
+            removerBusca(AlunoSucessor, NoAtual->filhodireita); // realiza uma busca utilizando o AlunoSucessor pelo Nó a Direita do NoAtual 
+        }
+    }
+    void BST::obterSucessor(Aluno& AlunoSucessor, Node* temp){
+            temp = temp->filhodireita; // recebe o filho à direita dele
+            while(temp->filhoesquerda != NULL){ // o temp aponta para os nós esquerda enquanto não é NULL
+                temp = temp->filhoesquerda;
+            }
+            AlunoSucessor = temp->aluno; // pega o valor desse nó temporario e atribui para AlunoSucessor 
 
     }
     void BST::buscar(Aluno& aluno, bool& busca){

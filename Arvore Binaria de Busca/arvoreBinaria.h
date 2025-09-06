@@ -22,6 +22,9 @@ public:
     bool estaCheio();
     void inserir(Aluno aluno);
     void remover(Aluno aluno);
+    void removerBusca(Aluno aluno, Node*& NoAtual); // O NoAtual ele é o ponteiro para o NoAtual
+    void deletarNode(Node*& NoAtual);
+    void obterSucessor(Aluno& AlunoSucessor, Node* temp);
     void buscar(Aluno& aluno, bool& busca);
     void printPreOrdem(Node* Nodeatual);
     void printInOrdem(Node* Nodeatual);
