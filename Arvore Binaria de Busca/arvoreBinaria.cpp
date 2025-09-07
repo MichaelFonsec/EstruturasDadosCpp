@@ -8,10 +8,16 @@ using namespace std;
         raiz = NULL;
     }
     BST::~BST(){ // Destrutor
-
+        deletarArvore(raiz);
     }
     void BST::deletarArvore(Node* Nodeatual){
+        if(Nodeatual != NULL){
+            deletarArvore(Nodeatual->filhoesquerda); // chama a função recursiva aonde visita os filhos a esquerda do No Atual para deletar
 
+            deletarArvore(Nodeatual->filhodireita); // chama a função recursiva aonde visita os filhos a direita do No Atual para deletar
+
+            delete Nodeatual; //Deleta o Nó Atual
+        }
     }
     Node* BST::obterRaiz(){
         return raiz;
@@ -127,11 +133,28 @@ using namespace std;
 
     }
     void BST::printPreOrdem(Node* Nodeatual){
-
+            if(Nodeatual != NULL){ // Verificas se o Nó Atual é diferente de NULL
+                cout << Nodeatual->aluno.obterNome() << ": "; // imprime o Nome do Aluno que está no No Atual
+                cout << Nodeatual->aluno.obterRa() << endl; // imprime o RA do Aluno que está no No Atual
+                
+                printPreOrdem(Nodeatual->filhoesquerda); // chama a função recursiva dele mesmo imprimindo os filhos da esquerda do Nó Atual
+                printPreOrdem(Nodeatual->filhodireita); // chama a função recursiva dele mesmo imprimindo os filhos da direita do Nó Atual
+            }
     }
     void BST::printInOrdem(Node* Nodeatual){
-        
+            if(Nodeatual != NULL){
+                printInOrdem(Nodeatual->filhoesquerda); // chama a função recursiva dele mesmo imprimindo os filhos da esquerda do Nó Atual
+                cout << Nodeatual->aluno.obterNome() << ": "; // imprime o Nome do Aluno que está no No Atual
+                cout << Nodeatual->aluno.obterRa() << endl; // imprime o RA do Aluno que está no No Atual
+                printInOrdem(Nodeatual->filhodireita); // chama a função recursiva dele mesmo imprimindo os filhos da direita do Nó Atual
+            }
+
     }
     void BST::printPosOrdem(Node* Nodeatual){
-
+            if(Nodeatual != NULL){
+                printPosOrdem(Nodeatual->filhoesquerda); // chama a função recursiva dele mesmo imprimindo os filhos da esquerda do Nó Atual
+                printPosOrdem(Nodeatual->filhodireita); // chama a função recursiva dele mesmo imprimindo os filhos da direita do Nó Atual
+                cout << Nodeatual->aluno.obterNome() << ": "; // imprime o Nome do Aluno que está no No Atual
+                cout << Nodeatual->aluno.obterRa() << endl; // imprime o RA do Aluno que está no No Atual
+            }
     }
